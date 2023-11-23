@@ -10,13 +10,10 @@ When working in a Qlik App, there are a number of reasons to why you would want 
 ## Example of commented expression
 
 ```
-// Volume Effect Calculation
-Num(
-  //Calculate at product level
-  Sum(Aggr(
+// Summed sales for 2015 requested by name, customer.
+Sum({<Year={2015}>}Sales)
 
-  ( //Quantity difference over year
-    Sum({$<Year={$(=Max(Year))}>}Quantity)
-  -
-
+/*
+Modified by Person Pearson the 14th nov 2023
+*/
 ```
