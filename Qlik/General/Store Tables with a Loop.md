@@ -1,4 +1,4 @@
-# Store tables with a loop 
+# Store Tables with a Loop 
 
 ## Use Case
 
