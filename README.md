@@ -1,6 +1,6 @@
 # BI-in-practice
 
-## Scope of BI-in-practice
+## Scope
 This project is intended to be filled with practical knowledge on all matters related to Qlik (`Qlik Sense Cloud`, `Qlik Sense Enterprise (On Premise)`, `Qlik Sense Desktop`, `Qlikview`). That includes theory on BI related topics such as data modeling, ETL practices, commenting and structuring code etc.
 
 ## Structure
