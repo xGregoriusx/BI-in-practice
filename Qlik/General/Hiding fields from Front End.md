@@ -36,3 +36,7 @@ The first alternative, HidePrefix is a good alternative to "always use" since yo
 
 The second alternative, tags, are good to use when you explicitly want to show (yourself or other developers) that these fields are hidden. A tip in that case is to put a section of your Qlik code att the end named 'Hide Fields' where you put the code.
 Then it is easy for the developer to comment out that part of the code if it is necessary to unhide the fields.
+
+> When you hide fields and beforehand select the setting 'Always one selected' for the field this will be shown in Qlik Front End
+> ![image](https://github.com/xGregoriusx/BI-in-practice/assets/139049888/54f8bc31-bed6-431b-9c54-713dc2996d47)
+
