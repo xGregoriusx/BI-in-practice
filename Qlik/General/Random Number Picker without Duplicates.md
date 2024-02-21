@@ -21,12 +21,19 @@ Load
 AutoGenerate 10;
 
 /*------------------------------------------------------------------------------
+Variables that controls which field the script will pick from, and which table.
+------------------------------------------------------------------------------*/
+
+SET vField = Rows;
+SET vTable = List;
+
+/*------------------------------------------------------------------------------
 Get the size of the List table and define the variable vSize.
 ------------------------------------------------------------------------------*/
 Size:
 Load
-	Count(Rows) as Size
-Resident List;
+	Count($(vField)) as Size
+Resident '$(vTable)';
 
 LET vSize = Peek('Size');
 Drop Table Size;
@@ -36,8 +43,8 @@ Put together the field AllRows, which will look like '1|2|3|...'.
 ------------------------------------------------------------------------------*/
 CompleteList:
 Load
-	Concat(Rows, '|', Rows) as AllRows
-Resident List;
+	Concat($(vField), '|', $(vField)) as AllRows
+Resident '$(vTable)';
 
 LET vAllRows = Peek('AllRows') & '|';
 Drop Table CompleteList;
@@ -56,13 +63,13 @@ amount, if you want less picks than all possible picks.
 ------------------------------------------------------------------------------*/
 Picks:
 Load
-	RecNo() 																				as PickNo,
-    Replace( If(RecNo()=1, '$(vAllRows)', Peek('Remaining')),
-    SubField(If(RecNo()=1, '$(vAllRows)', Peek('Remaining')), '|', RandomPick) & '|','') 	as Remaining,
-    SubField(If(RecNo()=1, '$(vAllRows)', Peek('Remaining')), '|', RandomPick) 				as PickedRow,
-    RandomPick;
+	RecNo()                                                                              as PickNo,
+	Replace( If(RecNo()=1, '$(vAllRows)', Peek('Remaining')),
+	SubField(If(RecNo()=1, '$(vAllRows)', Peek('Remaining')), '|', RandomPick) & '|','') as Remaining,
+	SubField(If(RecNo()=1, '$(vAllRows)', Peek('Remaining')), '|', RandomPick)           as PickedRow,
+	RandomPick;
 Load
-	Ceil(Rand() * ($(vSize) - (RecNo()-1))) 												as RandomPick
+	Ceil(Rand() * ($(vSize) - (RecNo()-1)))                                              as RandomPick
 AutoGenerate $(vSize);
 
 Drop Fields RandomPick, Remaining;
@@ -70,7 +77,7 @@ Drop Fields RandomPick, Remaining;
 /*------------------------------------------------------------------------------
 Cleanup of variables.
 ------------------------------------------------------------------------------*/
-LET vSize 	 =;
+LET vSize    =;
 LET vAllRows =;
 ```
 
