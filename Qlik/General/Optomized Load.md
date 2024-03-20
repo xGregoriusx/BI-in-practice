@@ -37,7 +37,7 @@ WHERE Exists(DateField);
 
 - Using a DISTINCT LOAD
 
-It is important to remember that the DISTINCT will be processed *after* the LOAD.
+It is important to remember that the DISTINCT will be processed *after* the LOAD. Meaning that all data will be loaded and then a Distinct of that data will be made.
 
 ```
 LargeTable:
