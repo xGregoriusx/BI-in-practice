@@ -141,3 +141,29 @@ Black(),
 LightRed()) 
 ```
  
+## Basic Master Calendar 
+
+```
+SET vDate = %KEY_Date;
+
+MasterCalendar:
+LOAD
+	TempDate                        as $(vDate),
+	
+	Year(TempDate)                  as Year, 
+	Month(TempDate)                 as Month,
+	'Q' & Ceil(Month(TempDate) / 3) as Quarter,
+;
+
+//=== Generate a temp table of dates === 
+LOAD
+	Date(MinDate + IterNo())        as TempDate
+WHILE MinDate + IterNo() <= MaxDate;
+
+//=== Get min/max dates from Date field ===/
+LOAD
+	Min(FieldValue('$(vDate)', Recno()))-1 as MinDate,
+	Max(FieldValue('$(vDate)', Recno()))   as MaxDate
+AUTOGENERATE FieldValueCount('$(vDate)');
+```
+ 
