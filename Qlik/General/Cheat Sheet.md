@@ -167,3 +167,8 @@ LOAD
 AUTOGENERATE FieldValueCount('$(vDate)');
 ```
  
+## Fix Dates 
+
+```
+Date(Num(Floor(DateField)), 'YYYY-MM-DD') as DateField
+```
