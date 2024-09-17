@@ -130,7 +130,8 @@ LOAD DISTINCT                               //Load Statements in capital letters
     Mid(Field2, 6, 200) as [Field2],
     False()             as [Field3],
     -1                  as [Field4]
-RESIDENT DataTable                          //Load Statements in capital letters
+RESIDENT                                    //Load Statements in capital letters
+    DataTable                          
 WHERE
     Left([ConditionField], 4) < 'Example'   //Space between characters such as < > + - / *
 ORDER BY
@@ -143,9 +144,11 @@ LOAD DISTINCT
     Mid(Field2, 6, 200) as [Field2],
     False()             as [Field3],
     -1                  as [Field4]
-RESIDENT DataTable                          
+RESIDENT
+    DataTable                          
 WHERE
-    Left([ConditionField], 4) < 'Example'   
+    Left([ConditionField], 4) < 'Example'
+    and [Conditionfiel2] = 'yes'
 ORDER BY
     [OrderField]                            
 ;
@@ -171,4 +174,6 @@ GROUP BY
 ORDER BY
 CONCATENATE
 JOIN
+DROP TABLE
+DROP FIELD
 ```
