@@ -70,3 +70,37 @@ Although you might generally be developing on a screen with higher resolution, t
 
 ******************************************************************************************************************/
 ```
+
+## Data Connection Variables
+
+**Why?**
+
+By using a variable to define where something should be loaded (or stored) you can easily change the loaded folder if the file is moved, or if you need to change the file path for some other reason.
+
+**Code**
+
+```
+//Path to load QVDs from.
+SET vG.QVDPath_Load = lib://QVD/Extract QVD/;
+
+//Path to store QVDs.
+SET vG.QVDPath_Store = lib://QVD/Transform QVD/;
+```
+
+## Mapping Tables
+
+**Why?**
+
+Keep a separate code section specifically for Mappings. The Section should be early in the script, lik after Main section, since later sections need to use the mappings.
+
+**Code**
+
+```
+MAP_CountryNames:                                   //Start table name with 'MAP_'
+MAPPING LOAD                                        //Load Statements in capital letters
+    CountryCodeID as [CountryCodeID],               //Always us alias (as) and define field name with brackets ('[]')
+    CountryName   as [CountryName]                  //Always us alias (as) and define field name with brackets ('[]')
+FROM                                                //Load Statements in capital letters
+    [$(vG.QvdPathSource_QVSync)SUS_Org.qvd] (qvd)   //Use variable for folder path, and keep on separate line
+;                                                   //Keep closeing statement ';' on separate line to increase readability
+```
