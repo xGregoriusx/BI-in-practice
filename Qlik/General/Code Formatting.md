@@ -99,8 +99,76 @@ Keep a separate code section specifically for Mappings. The Section should be ea
 MAP_CountryNames:                                   //Start table name with 'MAP_'
 MAPPING LOAD                                        //Load Statements in capital letters
     CountryCodeID as [CountryCodeID],               //Always us alias (as) and define field name with brackets ('[]')
-    CountryName   as [CountryName]                  //Always us alias (as) and define field name with brackets ('[]')
+    CountryName   as [CountryName]                  
 FROM                                                //Load Statements in capital letters
     [$(vG.QvdPathSource_QVSync)SUS_Org.qvd] (qvd)   //Use variable for folder path, and keep on separate line
 ;                                                   //Keep closeing statement ';' on separate line to increase readability
+
+                                                    //Separate Mapping Loads woth two empty rows
+MAP_CountryNames:                                   
+MAPPING LOAD                                        
+    CountryCodeID as [CountryCodeID],               
+    CountryName   as [CountryName]                  
+FROM                                                
+    [$(vG.QvdPathSource_QVSync)SUS_Org.qvd] (qvd)   
+;                                                   
+
+```
+
+## Load Tables
+
+**Why?**
+
+Keep a clear formatting for load tables, in order to increase comprehension and readability.
+
+**Code**
+
+```
+TableName:                                  //Always define a table name. Be explicit.
+LOAD DISTINCT                               //Load Statements in capital letters
+    Field1              as [Field1],        //Always us alias (as) and define field name with brackets ('[]')
+    Mid(Field2, 6, 200) as [Field2],
+    False()             as [Field3],
+    -1                  as [Field4]
+RESIDENT DataTable                          //Load Statements in capital letters
+WHERE
+    Left([ConditionField], 4) < 'Example'   //Space between characters such as < > + - / *
+ORDER BY
+    [OrderField]                            //Keep on separate row
+;                                           //Keep closeing statement ';' on separate line to increase readability
+
+CONCATENATE (TableName)                     //One empty row if Concatenate, Keep or Join is used, otherwise two empoty rows.
+LOAD DISTINCT                               
+    Field1              as [Field1],        
+    Mid(Field2, 6, 200) as [Field2],
+    False()             as [Field3],
+    -1                  as [Field4]
+RESIDENT DataTable                          
+WHERE
+    Left([ConditionField], 4) < 'Example'   
+ORDER BY
+    [OrderField]                            
+;
+```
+
+## List of Capitalized Load Statements
+
+**Why?**
+
+Keep these statements capitalized to increase readability and comprehension.
+
+**List**
+
+```
+LOAD
+DISTINCT
+FROM
+INLINE
+RESIDENT
+AUTOGENERATE
+WHERE
+GROUP BY
+ORDER BY
+CONCATENATE
+JOIN
 ```
